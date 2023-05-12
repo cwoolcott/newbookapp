@@ -1,0 +1,36 @@
+<html>
+
+<head>
+    <title>Books Listing</title>
+</head>
+
+<body>
+    <h1>ALL BOOKS</h1>
+    <a href="addbook">Click Here To Add Book</a>
+    <br><br>
+
+    <ul id="books"></ul>
+
+    <script>
+        // Fetch request to add a new pet
+        var booksContainer = document.getElementById("books");
+
+
+
+        fetch('/api/listbooks', {
+            method: 'GET',
+            headers: { 'Content-Type': 'application/json' },
+        })
+            .then((res) => res.json())
+            .then((books) => {
+                for (var i = 0; i < books.length; i++) {
+                    var book = document.createElement("li");
+                    book.innerHTML = books[i].title + " by " + books[i].author;
+                    booksContainer.append(book)
+                }
+            });
+    </script>
+
+</body>
+
+</html>
